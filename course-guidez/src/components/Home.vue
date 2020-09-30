@@ -15,6 +15,9 @@
       <li class="nav-item">
         <router-link :to="{name: 'SignUp'}" class="nav-link">Sign Up</router-link>
       </li>
+       <li class="nav-item">
+        <a href="#" @click="logout" class="nav-link bg-danger text-light">Logout</a>
+      </li>
     </ul>
       <router-link :to="{name: 'Login'}">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
@@ -28,8 +31,24 @@
 </template>
 
 <script>
+// firebas econfig
+import conn from '@/firebase/firebaseConfig';
+
 export default {
   name: 'Home',
+  data() {
+    return {
+      isLoggedIn: false,
+      currentUser: false,
+    };
+  },
+  methods: {
+    logout() {
+      conn.auth().signOut().then(() => {
+        this.$router.push({ name: 'Login' });
+      });
+    },
+  },
 };
 </script>
 
