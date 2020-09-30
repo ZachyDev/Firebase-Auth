@@ -12,6 +12,9 @@
         <div class="container">
             <form class="appointment-form" id="appointment-form" @submit.prevent="registerUser">
                 <h2 class="jumbotron">Register</h2>
+                <div class="alert alert-success" v-if="feedback">
+                  <span>{{feedback}}</span>
+                </div>
                 <div class="form-group-1">
                     <input type="email" name="email" id="email" placeholder="Email" v-model="email"/>
                     <input type="password" name="pass" id="pass" placeholder="Password" v-model="password"/>
@@ -36,16 +39,19 @@ export default {
     return {
       email: '',
       password: '',
+      feedback: '',
     };
   },
   methods: {
     registerUser() {
       conn.auth().createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          alert(`Account created for${this.email}`);
+          this.feedback = 'Account created for this.email.';
+          this.feedback = '';
+          this.$router.push({ name: 'Login' });
         })
         .catch((err) => {
-          alert(err.message);
+          this.feedback = err.message;
         });
     },
   },

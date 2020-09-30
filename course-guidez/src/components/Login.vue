@@ -10,14 +10,14 @@
 </nav>
     <div class="main">
         <div class="container">
-            <form class="appointment-form" id="appointment-form">
+            <form class="appointment-form" id="appointment-form" @submit.prevent="loginUser">
                 <h2 class="jumbotron">Login</h2>
                 <div class="form-group-1">
-                    <input type="text" name="name" id="name" placeholder="Your Name"/>
-                    <input type="email" name="email" id="email" placeholder="Email"/>
+                    <input type="email" name="email" id="email" placeholder="Email" v-model="email"/>
+                     <input type="password" name="pass" id="pass" placeholder="Password" v-model="password"/>
                 </div>
                 <div class="form-submit">
-                    <input type="submit" name="submit" id="submit" class="submit bg-success" value="Register"/>
+                    <input type="submit" name="submit" id="submit" class="submit bg-success" value="Login"/>
                 </div>
             </form>
         </div>
@@ -27,9 +27,28 @@
 </template>
 
 <script>
+// firebase config file
+import conn from '@/firebase/firebaseConfig';
 
 export default {
   name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    loginUser() {
+      conn.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: 'Home' });
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    },
+  },
 };
 
 </script>

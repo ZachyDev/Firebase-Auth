@@ -17,6 +17,8 @@ module.exports = {
       'linebreak-style': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'indent': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'eol-last': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      'no-alert': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      'padded-blocks': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     },
   };
   
