@@ -10,6 +10,9 @@
     <a class="navbar-brand" href="#">Course Guidez</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
+        <router-link :to="{name: 'Home'}" class="nav-link">Dashboard</router-link>
+      </li>
+      <li class="nav-item">
         <router-link :to="{name: 'SignUp'}" class="nav-link">Sign Up</router-link>
       </li>
     </ul>
@@ -19,7 +22,7 @@
   </div>
 </nav>
 <div class="jumbotron bg-info">
-  <h1 class="text-light">Welcome to Course Guidez.</h1>
+  <h1 class="text-light">Dashboard.</h1>
 </div>
   </div>
 </template>
