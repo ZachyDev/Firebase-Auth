@@ -20,6 +20,9 @@
                     <input type="submit" name="submit" id="submit" class="submit bg-success" value="Login"/>
                 </div>
             </form>
+             <button type="button" class="btn btn-success" @click="SignInWithGoogle">Sign with Google</button><br /> <br>
+             <button type="button" class="btn btn-success" @click="SignInWithGithub">Sign with Github</button><br><br>
+            <button type="button" class="btn btn-success" @click="SignInWithTwitter">Sign with Twitter</button><br><br>
         </div>
 
     </div>
@@ -28,7 +31,9 @@
 
 <script>
 // firebase config file
-import conn from '@/firebase/firebaseConfig';
+import firebase from '@/firebase/firebaseConfig';
+// auth file
+import { googleProvider, githubProvider, twitterProvider } from '@/auth/auth';
 
 export default {
   name: 'Login',
@@ -36,17 +41,44 @@ export default {
     return {
       email: '',
       password: '',
+      googleProvider,
+      githubProvider,
+      twitterProvider,
     };
   },
   methods: {
     loginUser() {
-      conn.auth().signInWithEmailAndPassword(this.email, this.password)
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           this.$router.push({ name: 'Home' });
         })
         .catch((err) => {
           alert(err.message);
         });
+    },
+    SignInWithGoogle() {
+      firebase.auth().signInWithPopup(this.googleProvider).then(() => {
+        this.$router.push({ name: 'Home' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
+    SignInWithGithub() {
+      firebase.auth().signInWithPopup(this.githubProvider).then((res) => {
+        this.$router.push({ name: 'Home' });
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    SignInWithTwitter() {
+      firebase.auth().signInWithPopup(this.twitterProvider).then((res) => {
+        this.$router.push({ name: 'Home' });
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
     },
   },
 };

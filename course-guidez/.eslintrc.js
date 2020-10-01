@@ -19,6 +19,7 @@ module.exports = {
       'eol-last': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'no-alert': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'padded-blocks': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      'new-cap': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     },
   };
   
